@@ -1,4 +1,4 @@
-
+# Datenbankstruktur
 
 ## Tabelle: `Benutzer`
 - `Benutzer_ID` (Primärschlüssel)

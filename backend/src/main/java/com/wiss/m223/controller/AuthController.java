@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wiss.m223.helper.JwtResponse;
-import com.wiss.m223.model.Role;
 import com.wiss.m223.model.User;
-import com.wiss.m223.model.Role.ERole;
 import com.wiss.m223.repository.RoleRepository;
 import com.wiss.m223.repository.UserRepository;
 import com.wiss.m223.security.JwtUtils;

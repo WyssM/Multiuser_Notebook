@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.wiss.m223.model.Role;
 import com.wiss.m223.model.User;
 import com.wiss.m223.repository.UserRepository;
 

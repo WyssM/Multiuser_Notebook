@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.wiss.m223.repository.BenutzerRepository;
+import com.wiss.m223.repository.KategorienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wiss.m223.helper.JwtResponse;
-import com.wiss.m223.model.User;
-import com.wiss.m223.repository.RoleRepository;
-import com.wiss.m223.repository.UserRepository;
+import com.wiss.m223.model.Benutzer;
 import com.wiss.m223.security.JwtUtils;
 import com.wiss.m223.security.UserDetailsImpl;
 
@@ -34,9 +34,9 @@ public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
-    UserRepository userRepository;
+    BenutzerRepository BenutzerRepository;
     @Autowired
-    RoleRepository roleRepository;
+    KategorienRepository KategorienRepository;
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -62,18 +62,18 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (BenutzerRepository.existsByBenutzername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (BenutzerRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+        Benutzer user = new Benutzer(signUpRequest.getUsername(),
                 signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

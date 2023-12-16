@@ -14,6 +14,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * Diese Klassen enthalten die grundlegenden Entitätsdefinitionen für Benutzer,
+ * Notizbuch, Kategorien und Notizen, jeweils mit den entsprechenden Annotationen für JPA-Entitäten und der
+ * Zuordnung zwischen den Entitäten
+ * mithilfe von @ManyToOne- und @JoinColumn-Annotationen
+ */
 @Entity
 @Table(name = "Benutzer")
 public class Benutzer {

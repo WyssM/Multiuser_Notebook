@@ -17,6 +17,8 @@ public class M223Application {
 	 * enable Cors requests from react FE
 	 * @return
 	 */
+
+	/*
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 
@@ -31,3 +33,4 @@ public class M223Application {
 
 	}
 }
+*/

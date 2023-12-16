@@ -38,6 +38,6 @@
 
 ## User Story 7 
 #### Wer: Benutzer
-#### Was: Kann Änderungen an den Notizen vornehmen
+#### Was: Kann Änderungen an seinen persönlcihen Notizen vornehmen
 #### Warum: Um versehntliche oder unerwünschte Änderungen zu korrigieren
-#### Akzeptanzkriterien: Der Benutzer sieht seine angepassten Änderungen  
+#### Akzeptanzkriterien: Der Benutzer sieht seine angepassten Änderungen in den persönlichen Notizen  

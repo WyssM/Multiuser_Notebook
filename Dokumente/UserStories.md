@@ -30,13 +30,13 @@
 #### Warum: Um seine Notzen festzuhalten und die Zusammenarbeit mit den Kollegen zu fördern
 #### Akzeptanzkriterien: Der Benutzer kann seine Notizen in der neuen Unterkategorie festhalten
 
-## User Story 5
+## User Story 6
 #### Wer: Benutzer 
 #### Was: Lösht seine eigene Notizen
 #### Warum: Um seine eigenen irrelevanten Notizen zu entfernen und unnötige Datenmengen zu vermeiden. 
 #### Akzeptanzkriterien: Die gelöschten Notizen sind für den Benutzer nicht mehr sichtbar und können nicht wiederhergestellt werden.
 
-## User Story 5 
+## User Story 7 
 #### Wer: Benutzer
 #### Was: Kann Änderungen an den Notizen vornehmen
 #### Warum: Um versehntliche oder unerwünschte Änderungen zu korrigieren

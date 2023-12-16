@@ -32,7 +32,7 @@
 
 ## User Story 6
 #### Wer: Benutzer 
-#### Was: Lösht seine eigene Notizen
+#### Was: Löscht seine eigene Notizen
 #### Warum: Um seine eigenen irrelevanten Notizen zu entfernen und unnötige Datenmengen zu vermeiden. 
 #### Akzeptanzkriterien: Die gelöschten Notizen sind für den Benutzer nicht mehr sichtbar und können nicht wiederhergestellt werden.
 

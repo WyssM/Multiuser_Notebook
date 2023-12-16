@@ -38,6 +38,9 @@ public class Notizen {
         this.kategorie = kategorie;
     }
 
+    public Notizen() {
+    }
+
     public Long getNotizId() {
         return notizId;
     }

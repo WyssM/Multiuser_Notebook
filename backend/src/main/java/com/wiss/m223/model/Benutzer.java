@@ -42,6 +42,11 @@ public class Benutzer {
         this.passwort = passwort1;
     }
 
+    public Benutzer() {
+        
+    }
+
+
     public Long getBenutzerId() {
         return benutzerId;
     }
@@ -80,6 +85,9 @@ public class Benutzer {
 
     public void setRolle(String rolle) {
         this.rolle = rolle;
+    }
+
+    public <Berechtigungen> void setBerechtigungen(Berechtigungen berechtigungenDTO) {
     }
 }
 

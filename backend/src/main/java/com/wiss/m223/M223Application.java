@@ -12,6 +12,7 @@ public class M223Application {
 	public static void main(String[] args) {
 		SpringApplication.run(M223Application.class, args);
 	}
+}
 	
 	/**
 	 * enable Cors requests from react FE

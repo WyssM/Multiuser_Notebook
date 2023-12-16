@@ -6,17 +6,33 @@ package com.wiss.m223.controller;
  */
 
 import com.wiss.m223.service.BenutzerService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/benutzer")
-public class BenutzerController {
+public class BenutzerController<BenutzerDTO, Berechtigungen> {
     private final BenutzerService benutzerService;
 
     public BenutzerController(BenutzerService benutzerService) {
         this.benutzerService = benutzerService;
     }
 
+    @PostMapping("/neu")
+    public ResponseEntity<String> createBenutzer(@RequestBody BenutzerDTO benutzerDTO) {
+        benutzerService.createBenutzer(benutzerDTO);
+        return ResponseEntity.ok("Neuer Benutzer erstellt!");
+    }
 
+    @PutMapping("/{benutzerId}/berechtigungen")
+    public ResponseEntity<String> changeBerechtigungen(@PathVariable Long benutzerId, @RequestBody Berechtigungen berechtigungenDTO) {
+         benutzerService.changeBerechtigungen(benutzerId, berechtigungenDTO);
+        return ResponseEntity.ok("Berechtigungen aktualisiert!");
+    }
+
+    @DeleteMapping("/{benutzerId}")
+    public ResponseEntity<String> deleteBenutzer(@PathVariable Long benutzerId) {
+        benutzerService.deleteBenutzer(benutzerId);
+        return ResponseEntity.ok("Benutzer gelöscht!");
+    }
 }

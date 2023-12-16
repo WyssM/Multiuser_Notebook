@@ -22,6 +22,9 @@ public class Kategorien {
         this.ersteller = ersteller;
     }
 
+    public Kategorien() {
+    }
+
     public Long getKategorieId() {
         return kategorieId;
     }

@@ -24,6 +24,9 @@ import jakarta.persistence.*;
             this.ersteller = ersteller;
         }
 
+        public Notizbuch() {
+        }
+
         public Long getNotizbuchId() {
             return notizbuchId;
         }

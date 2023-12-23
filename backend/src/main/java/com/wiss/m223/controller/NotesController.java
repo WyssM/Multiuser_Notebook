@@ -5,6 +5,7 @@ Bietet Funktionen zum Erstellen, Abrufen, Aktualisieren und Löschen von Notizen
 
 package com.wiss.m223.controller;
 
+import com.wiss.m223.model.Notes;
 import com.wiss.m223.service.NotesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class NotesController<NoteDTO> {
 
     // Ein POST-Endpunkt zum Erstellen einer neuen Notiz. Nimmt Notizdaten im Request-Body entgegen.
     @PostMapping("/new")
-    public ResponseEntity<String> createNote(@RequestBody NoteDTO noteDTO) {
+    public ResponseEntity<String> createNote(@RequestBody Notes noteDTO) {
         notesService.createNote(noteDTO);// Ruft die Methode createNote des NotesService auf, um die Notiz zu erstellen.
         return ResponseEntity.ok("New note created!"); // Gibt eine Erfolgsmeldung zurück, wenn die Notiz erstellt wurde.
     }

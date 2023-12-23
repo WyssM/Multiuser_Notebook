@@ -28,7 +28,7 @@ public class WebSecurityConfig {
     private AuthenticationEntryPoint unauthorizedHandler;
 
     // Definiert die URL-Muster, die öffentlich zugänglich sind
-    private final static String[] EVERYONE = {"/notebook/**","/notes/**", "/categories/**", "/api/auth/**","/api/auth/signup","/api/auth/signin",};
+    private final static String[] EVERYONE = {"/notebook/**","/user/**","/notes/**", "/categories/**", "/api/auth/**","/api/auth/signup","/api/auth/signin",};
 
     // Definiert die URL-Muster, die spezifischen Rollen vorbehalten sind
     private final static String[] ADMIN_URLS = {"/admin/**","user/{userId}/permissions", };
@@ -64,7 +64,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers(EVERYONE).permitAll()
-                        .requestMatchers(ADMIN_URLS).hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(ADMIN_URLS).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

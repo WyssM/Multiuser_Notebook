@@ -2,15 +2,18 @@ package com.wiss.m223.model;
 
 import jakarta.persistence.*;
 
+// Diese Entity-Klasse repräsentiert eine Kategorie in der Datenbank.
 @Entity
 @Table(name = "Categories")
 public class Categories {
+    //Ich definiere die Attribute einer Kategorie wie ID, Name und Beschreibung.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
     private String name;
     private String description;
 
+    // Eine ManyToOne-Beziehung, die angibt, welcher Benutzer die Kategorie erstellt hat.
     @ManyToOne
     @JoinColumn(name = "creatorId")
     private User creator;

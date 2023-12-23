@@ -3,15 +3,7 @@ package com.wiss.m223.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -20,60 +12,70 @@ import jakarta.validation.constraints.NotBlank;
  * Zuordnung zwischen den Entitäten
  * mithilfe von @ManyToOne- und @JoinColumn-Annotationen
  */
+// Diese Entity-Klasse repräsentiert einen Benutzer in der Datenbank.
 @Entity
-@Table(name = "Benutzer")
-public class Benutzer {
+@Table(name = "User")
+public class User {
+    // Hier definiere ich die ID, den Benutzernamen, das Passwort und die E-Mail des Benutzers als Felder.
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long benutzerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Die ID wird automatisch generiert.
+    private Long userId;
+
     @NotBlank
-    private String benutzername;
+    private String username;
+
     @NotBlank
-    private String passwort;
+    private String password;
+
     @NotBlank
     private String email;
-    private String rolle;
-    private final Set<Role> roles = new HashSet<>();
-    public Benutzer(Long benutzerId, String benutzername, String passwort, String email, String rolle, String benutzername1, String email1, String passwort1) {
-        this.benutzerId = benutzerId;
-        this.rolle = rolle;
-        this.benutzername = benutzername1;
-        this.email = email1;
-        this.passwort = passwort1;
+
+    // Eine Set-Kollektion, um die Rollen des Benutzers zu speichern. Jeder Benutzer kann mehrere Rollen haben.
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+    public User(Long userId, String username, String password, String email, String role) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
-    public Benutzer() {
-        
+    public User() {
     }
-
-
-
-
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
     public Set<Role> getRoles() {
         return roles;
     }
-    public Long getBenutzerId() {
-        return benutzerId;
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setBenutzerId(Long benutzerId) {
-        this.benutzerId = benutzerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getBenutzername() {
-        return benutzername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setBenutzername(String benutzername) {
-        this.benutzername = benutzername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPasswort() {
-        return passwort;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -84,16 +86,10 @@ public class Benutzer {
         this.email = email;
     }
 
-    public String getRolle() {
-        return rolle;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-    public void setRolle(String rolle) {
-        this.rolle = rolle;
-    }
-
-    public <Berechtigungen> void setBerechtigungen(Berechtigungen berechtigungenDTO) {
+    public <Permissions> void setPermissions(Permissions permissionsDTO) {
+        
     }
 }
-
-

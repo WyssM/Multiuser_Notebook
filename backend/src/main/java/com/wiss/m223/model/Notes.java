@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+// Diese Entity-Klasse repräsentiert eine Notiz in der Datenbank.
 @Entity
 @Table(name = "Notes")
 public class Notes {
+    //Ich definiere die Attribute einer Notiz wie ID, Titel, Inhalt und Erstellungsdatum.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long noteId;
@@ -15,6 +17,7 @@ public class Notes {
     private Date creationDate;
     private Date lastUpdate;
 
+    // 3 Beziehungen, die angeben, welcher Benutzer und welches Notizbuch die Notiz besitzt.
     @ManyToOne
     @JoinColumn(name = "creatorId")
     private User creator;

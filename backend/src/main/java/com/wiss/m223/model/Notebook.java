@@ -2,9 +2,12 @@ package com.wiss.m223.model;
 
 import java.util.Date;
 import jakarta.persistence.*;
+
+// Diese Entity-Klasse repräsentiert ein Notizbuch in der Datenbank.
 @Entity
 @Table(name = "Notebook")
 public class Notebook {
+    // Ich definiere die Attribute eines Notizbuches wie ID, Titel, Beschreibung und Erstellungsdatum.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notebookId;
@@ -12,6 +15,7 @@ public class Notebook {
     private String description;
     private Date creationDate;
 
+    // Eine ManyToOne-Beziehung, die angibt, welcher Benutzer das Notizbuch erstellt hat.
     @ManyToOne
     @JoinColumn(name = "creatorId")
     private User creator;

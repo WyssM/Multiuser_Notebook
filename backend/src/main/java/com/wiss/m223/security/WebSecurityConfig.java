@@ -1,3 +1,4 @@
+// Dies ist die Hauptkonfigurationsklasse für die Sicherheit meiner Webanwendung.
 package com.wiss.m223.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,21 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+// Mit @Configuration und @EnableWebSecurity aktiviere ich die Web-Sicherheitseinstellungen.
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
     @Autowired
     private AuthenticationEntryPoint unauthorizedHandler;
-    private final static String[] EVERYONE = { "/public", "/category", "/quiz", "/api/auth/**", };
-    // private final static String[] EVERYONE = { "/public", "/private", "/admin" };
-    private final static String[] SECURE = { "/question", "/private", "/admin" };
-    private final static String[] ROLES = { "USER", "MODERATOR", "ADMIN" };
+
+    // Definiert die URL-Muster, die öffentlich zugänglich sind
+    private final static String[] EVERYONE = {"/notebook/**","/notes/**", "/categories/**", "/api/auth/**","/api/auth/signup","/api/auth/signin",};
+
+    // Definiert die URL-Muster, die spezifischen Rollen vorbehalten sind
+    private final static String[] ADMIN_URLS = {"/admin/**","user/{userId}/permissions", };
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -53,14 +58,18 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
+        http.csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(EVERYONE).permitAll()
-                        .anyRequest().authenticated());
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(),
-                UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests(authorize -> authorize
+                        .requestMatchers(EVERYONE).permitAll()
+                        .requestMatchers(ADMIN_URLS).hasAuthority("ROLE_ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 }

@@ -6,11 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// Ich markiere es als Repository und erweitere JpaRepository, um CRUD-Operationen und mehr zu ermöglichen.
 @Repository
 public interface NotesRepository extends JpaRepository<Notes, Long> {
-    // Finds notes belonging to a specific notebook
-    List<Notes> findByNotebookId(Long notebookId);
 
-    // Finds notes containing a specific text in the content
-    List<Notes> findByContentContaining(String content);
 }

@@ -1,33 +1,27 @@
+// Diese Klasse implementiert UserDetailsService und wird verwendet, um Benutzerdetails zu laden.
 package com.wiss.m223.security;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import com.wiss.m223.model.User;
+import com.wiss.m223.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.wiss.m223.model.User;
-
-import jakarta.transaction.Transactional;
-
+// Ich markiere es als Service, damit es im Spring-Kontext verwaltet wird.
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    // Überschreiben der Methode loadUserByUsername, um Benutzerdetails zu laden.
     @Override
-    @Transactional
-    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role r : user.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(r.getName().toString()));
-        }
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+
         return UserDetailsImpl.build(user);
     }
 }

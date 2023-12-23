@@ -14,12 +14,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
-// 
-//   This class has 3 main functions:
-//   generateJwtToken: create JWT Token from Auth object
-//   getUserNameFromJwtToken: get username from JWT
-//   validateJwtToken: validate a JWT with a secret
 
+/*This class has 3 main functions:
+generateJwtToken: create JWT Token from Auth object
+getUserNameFromJwtToken: get username from JWT
+validateJwtToken: validate a JWT with a secret
+*/
+
+// Ich markiere es als Komponente, damit es im Spring-Kontext verwaltet wird.
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
@@ -28,7 +30,7 @@ public class JwtUtils {
     @Value("${m223.app.jwtExpirationMs}") 
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication) {// Methode zum Generieren eines JWT-Token basierend auf den Benutzerdetails.
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
@@ -39,12 +41,12 @@ public class JwtUtils {
                 .compact();
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getUserNameFromJwtToken(String token) { // Methode zum Extrahieren des Benutzernamens aus dem Token.
         return Jwts.parser().setSigningKey(jwtSecret)
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public boolean validateJwtToken(String authToken) {// Methode zur Validierung des Tokens.
         try {
             Jwts.parser().setSigningKey(jwtSecret)
                     .parseClaimsJws(authToken);

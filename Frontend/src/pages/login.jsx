@@ -1,54 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthService from "../functions/auth.service";
+import React, { useState } from 'react';
+import { signIn } from './functions/AuthService';
 
-export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+const Login = () => {
+    const [userData, setUserData] = useState({ username: '', password: '' });
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // verhindert das standardmässige Absenden des Formulars
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await signIn(userData);
+            
+        } catch (error) {
+            console.error("Fehler beim Anmelden", error);
+        }
+    };
 
-    AuthService.login(username, password) // AJAX call ans Backend
-      .then(() => {
-        // Erfolg
-        navigate("/private");
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
-  };
+    return (
+        <form onSubmit={handleSubmit}>
+            {/* Benutzername und Passwortfelder */}
+            <button type="submit">Anmelden</button>
+        </form>
+    );
+};
 
-  // for Username
-  const onChangeUsername = (e) => { setUsername(e.target.value); };
-
-  // for password
-  const onChangePassword = (e) => { setPassword(e.target.value); };
-
-  return (
-    <form onSubmit={handleSubmit} method="post">
-      <label>
-        Username:
-        <input
-          value={username}
-          onChange={onChangeUsername}
-          name="username"
-          type="text"
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          value={password}
-          onChange={onChangePassword}
-          name="password"
-          type="password"
-        />
-      </label>
-      <br />
-      <button type="submit">Login</button>
-    </form>
-  );
-}
+export default Login;

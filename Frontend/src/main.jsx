@@ -1,34 +1,26 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import Public, { loader as public_loader} from "./pages/public";
-import Private, { loader as private_loader} from "./pages/private";
-import Login from "./pages/login";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import "./index.css";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import UserDashboard from './pages/UserDashboard.jsx';
+import NotebookCategory from './pages/NotebookCategory.jsx';
+import Note from './pages/Note.jsx';
+import Login from './pages/login.jsx';
+import Signup from './pages/Signup.jsx';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>,
-  },
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/public",
-    loader: public_loader,
-    element: <Public />
-  },
-  {
-    path: "/private",
-    loader: private_loader,
-    element: <Private />
-  },
-]);
+const Main = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/user" element={<UserDashboard />} />
+                <Route path="/notebook-category" element={<NotebookCategory />} />
+                <Route path="/note" element={<Note />} />
+            </Routes>
+        </Router>
+    );
+};
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

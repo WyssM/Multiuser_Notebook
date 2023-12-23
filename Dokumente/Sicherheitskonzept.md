@@ -21,8 +21,8 @@ Die Notizbuch-Webanwendung ermöglicht es Benutzern, Notizen und Notizbücher zu
 - Benutzer erstellen Kategorien und Notizen 
 
 
-## 10. Überprüfung und Aktualisierung
+## 4. Überprüfung und Aktualisierung
 - Regelmässige Überprüfung des Sicherheitskonzepts.
 
-### 11 Zusammenfassung
+### 5 Zusammenfassung
 Das Sicherheitskonzept ist ein Dokument,welches sich forlaufend erweitern kann. Je nach Risikoeinschätzung und aktueller Gefahrenlage.

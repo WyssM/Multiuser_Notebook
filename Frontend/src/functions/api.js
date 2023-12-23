@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// Ich richte axios mit der Basis-URL meines Servers ein
 const API = axios.create({
     baseURL: 'http://localhost:8080'
 });

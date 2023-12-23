@@ -1,20 +1,29 @@
+// NotebookForm.js - Eine Formularkomponente, um neue Notizbücher anzulegen
+
+// Import von React und useState-Hook
 import React, { useState } from 'react';
+
+// Import der createNotebook-Funktion aus dem API-Service
 import { createNotebook } from './api';
 
 const NotebookForm = () => {
+    // State-Hooks für Titel und Beschreibung des Notizbuchs
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    // handleSubmit-Funktion wird beim Absenden des Formulars aufgerufen
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Verhindert das Neuladen der Seite bei Formularabsendung
         try {
+            // Sendet die Daten zum Erstellen eines neuen Notizbuchs an den Server
             const response = await createNotebook({ title, description });
-            console.log(response.data);
+            console.log("Notizbuch erstellt:", response.data);
         } catch (error) {
-            console.error("Fehler beim Erstellen des Notizbuchs", error);
+            console.error("Fehler beim Erstellen des Notizbuchs", error); // Fehlerbehandlung
         }
     };
 
+    // Das Formular, das vom Benutzer ausgefüllt wird
     return (
         <form onSubmit={handleSubmit}>
             <input
